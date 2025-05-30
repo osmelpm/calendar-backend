@@ -29,7 +29,7 @@ router.post(
       .withMessage("Invalid date format"),
     fieldValidator,
   ],
-  createEvent
+  createEvent,
 );
 
 router.put(
@@ -48,7 +48,7 @@ router.put(
     param("id").isMongoId().withMessage("Invalid mongoId format"),
     fieldValidator,
   ],
-  updateEvent
+  updateEvent,
 );
 
 router.delete(
@@ -57,7 +57,7 @@ router.delete(
     param("id").isMongoId().withMessage("Invalid mongoId format"),
     fieldValidator,
   ],
-  deleteEvent
+  deleteEvent,
 );
 
 export default router;

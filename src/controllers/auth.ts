@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
 import { compareSync, hashSync } from "bcrypt";
-import { User } from "../models";
+import { Request, Response } from "express";
+
 import { generateJWT } from "../helpers/jwt";
+import { User } from "../models";
 
 export const createUser = async (req: Request, res: Response) => {
   const { name, email, password } = req.body;

@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Router } from "express";
 import { body } from "express-validator";
-import { fieldValidator, verifyToken } from "../middlewares";
+
 import { createUser, loginUser, refreshToken } from "../controllers";
+import { fieldValidator, verifyToken } from "../middlewares";
 
 export const router = Router();
 
@@ -12,7 +14,7 @@ router.post(
     body("password").notEmpty().withMessage("Password is required"),
     fieldValidator,
   ],
-  loginUser
+  loginUser,
 );
 
 router.post(
@@ -23,7 +25,7 @@ router.post(
     body("password").notEmpty().withMessage("Password is required"),
     fieldValidator,
   ],
-  createUser
+  createUser,
 );
 
 router.get("/refresh-token", verifyToken, refreshToken);

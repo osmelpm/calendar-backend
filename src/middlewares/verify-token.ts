@@ -14,7 +14,7 @@ declare global {
 export const verifyToken = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const bearerToken = req.header("authorization");
 
