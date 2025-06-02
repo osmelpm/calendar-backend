@@ -6,7 +6,7 @@ import { JwtPayload } from "../helpers/jwt";
 declare global {
   namespace Express {
     interface Request {
-      user?: { uid: string; name: string };
+      user?: { uid: string; name: string; email: string };
     }
   }
 }
@@ -27,9 +27,13 @@ export const verifyToken = (
   const token = bearerToken.split(" ")[1];
 
   try {
-    const { uid, name } = jwt.verify(token, envs.JWT_SECRET, {}) as JwtPayload;
+    const { uid, name, email } = jwt.verify(
+      token,
+      envs.JWT_SECRET,
+      {},
+    ) as JwtPayload;
 
-    req.user = { uid, name };
+    req.user = { uid, name, email };
 
     next();
   } catch (error) {

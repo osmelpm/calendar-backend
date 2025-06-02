@@ -4,6 +4,7 @@ import { envs } from "../config";
 export type JwtPayload = {
   uid: string;
   name: string;
+  email: string;
 };
 
 export const generateJWT = (payload: JwtPayload) => {

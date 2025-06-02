@@ -26,7 +26,7 @@ export const createUser = async (req: Request, res: Response) => {
 
     await newUser.save();
 
-    const token = generateJWT({ name: newUser.name, uid: newUser.id });
+    const token = generateJWT({ name: newUser.name, uid: newUser.id, email });
 
     res.json({
       uid: newUser.id,
@@ -59,7 +59,7 @@ export const loginUser = async (req: Request, res: Response) => {
       });
     }
 
-    const token = generateJWT({ name: user.name, uid: user.id });
+    const token = generateJWT({ name: user.name, uid: user.id, email });
 
     res.json({
       uid: user.id,
@@ -76,9 +76,9 @@ export const loginUser = async (req: Request, res: Response) => {
 };
 
 export const refreshToken = async (req: Request, res: Response) => {
-  const { uid, name } = req.user!;
+  const { uid, name, email } = req.user!;
 
-  const token = generateJWT({ name, uid });
+  const token = generateJWT({ name, uid, email });
 
-  res.json({ token });
+  res.json({ uid, name, email, token });
 };
