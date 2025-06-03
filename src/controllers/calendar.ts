@@ -21,7 +21,7 @@ export const getAllEvents = async (req: Request, res: Response) => {
 
 export const createEvent = async (req: Request, res: Response) => {
   const data = matchedData<Event>(req);
-  const event = new Event({ ...data, user: req.user?.uid });
+  const event = new Event({ ...data, user: req.user!.uid });
 
   try {
     await event.save();
