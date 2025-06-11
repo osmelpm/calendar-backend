@@ -13,6 +13,6 @@ app.use(express.static("public"));
 
 app.use("/api", apiRouter);
 
-app.listen(envs.PORT, () =>
+app.listen(envs.PORT, "0.0.0.0", () =>
   console.log(`Server is running on port ${envs.PORT}`),
 );
