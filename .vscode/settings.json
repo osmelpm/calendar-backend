@@ -1,0 +1,4 @@
+{
+  "appService.defaultWebAppToDeploy": "/subscriptions/9e47095c-3521-4452-97da-9e9be79e1a04/resourceGroups/memilavi-course-rg/providers/Microsoft.Web/sites/calendarapp-api",
+  "appService.deploySubpath": "."
+}
