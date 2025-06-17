@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: calendar-api-config
+data:
+  PORT: "3000"
+  NODE_ENV: "production"
+  JWT_EXPIRES_IN: "2h"

@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calendar-api-deployment
+  labels:
+    app: calendar-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: calendar-api
+  template:
+    metadata:
+      labels:
+        app: calendar-api
+    spec:
+      containers:
+        - name: calendar-api
+          image: calendarapp-c3h0fqb3gjd9cvem.azurecr.io/calendar-api:v1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_CNN
+              valueFrom:
+                secretKeyRef:
+                  name: calendar-api-secret
+                  key: DB_CNN
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: calendar-api-config
+                  key: NODE_ENV
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: calendar-api-config
+                  key: PORT
+            - name: JWT_EXPIRES_IN
+              valueFrom:
+                configMapKeyRef:
+                  name: calendar-api-config
+                  key: JWT_EXPIRES_IN
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: calendar-api-secret
+                  key: JWT_SECRET
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: calendar-api-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: calendar-api
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 3000
